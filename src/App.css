@@ -1,0 +1,49 @@
+.App {
+  text-align: center;
+}
+
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10vh;
+  background: rgb(85, 85, 228);
+  color: white;
+  }
+
+.createInterview
+{
+  display: flex;
+  justify-content: center;
+  
+  min-height: 10vh;
+}
+
+.error
+{
+  display: flex;
+  
+  justify-content: center;
+  
+}
+
+.bigblue {
+  font-family: Arial;
+ 
+  padding-right: 2vh;
+  padding-left: 2vh;
+ 
+  background: rgb(7, 115, 134);
+  color: white;
+
+  width: 1000px;
+  border-block-end-width: 1px;
+}
+
+.interviewElement
+{
+  background: rgb(85, 85, 228);
+  color: white;
+  padding-left: 1vh;
+  
+}
