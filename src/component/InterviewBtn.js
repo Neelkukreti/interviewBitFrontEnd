@@ -3,6 +3,33 @@ import '.././App.js';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
+
+function timeConversion(timeStart,f)
+{
+  if(f==1)
+ { let t;
+  let t2;
+  t=(parseInt(parseInt(timeStart) / 60));
+  if(t<10) 
+  {t2= "0"+t;} 
+  else 
+  t2=t;
+  return t2;
+ }
+ else
+ {
+  let t;
+  let t2;
+  t=(parseInt(parseInt(timeStart) % 60));
+  if(t<10) 
+  {t2= "0"+t;} 
+  else 
+  t2=t;
+  return t2;
+ }
+
+ 
+}
 function InterviewBtn({
   id,
   date,
@@ -19,15 +46,18 @@ function InterviewBtn({
 }) {
   console.log('logging props');
   console.log('time' + timeStart);
+  
+ // let timeConvertedHr=()=>{ t=parseInt(parseInt(timeStart) / 60); if(t<10) {return "0"+t} else return t};
+ 
   return (
     <div>
       <div className='_button'>
         Interview Date :{date}
         <div>
-          <b>Start Time: </b> {parseInt(parseInt(timeStart) / 60)} :
-          {parseInt(parseInt(timeStart) % 60)} <b>End Time: </b>
-          {parseInt(parseInt(timeEnd) / 60)} :{' '}
-          {parseInt(parseInt(timeEnd) % 60)}
+          <b>Start Time: </b> {timeConversion(timeStart,1)} :
+          {timeConversion(timeStart,0)} <b>End Time: </b>
+          {timeConversion(timeEnd,1)} :{' '}
+          {timeConversion(timeEnd,0)}
         </div>
         Candidate Email: {candidate}
         <br />
