@@ -155,10 +155,9 @@ function CreateInterview({ history }) {
         formData.append('timeStart', timeSValue);
         formData.append('timeEnd', timeEValue);
         formData.append('date', date);
-        formData.append(
-          'interviewer',
-          interviewer + `,${interviewer1},${interviewer2}`
-        );
+        formData.append('interviewer',interviewer); 
+        formData.append('interviewer',interviewer1);
+        formData.append('interviewer',interviewer2);
         formData.append('interviewerName', interviewerName);
         formData.append('candidateName', candidateName);
         formData.append('candidate', candidate);

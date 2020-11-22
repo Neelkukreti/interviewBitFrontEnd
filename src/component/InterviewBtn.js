@@ -52,17 +52,17 @@ function InterviewBtn({
   return (
     <div>
       <div className='_button'>
-        Interview Date :{date}
+        <b>Interview Date :{date}</b>
         <div>
           <b>Start Time: </b> {timeConversion(timeStart,1)} :
           {timeConversion(timeStart,0)} <b>End Time: </b>
           {timeConversion(timeEnd,1)} :{' '}
           {timeConversion(timeEnd,0)}
         </div>
-        Candidate Email: {candidate}
+        <b>Candidate Email:</b> {candidate}
         <br />
-        Interviewer emails:{' '}
-        {interviewer?.split(',').map((_i) => (
+        <b>Interviewer emails:</b>{' '}
+        {interviewer.map((_i) => (
           <p>{_i}</p>
         ))}
         <div>

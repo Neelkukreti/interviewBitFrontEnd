@@ -4,6 +4,9 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import validator from 'validator';
 
+
+
+
 function UpdateInterview({
   handleClose,
   fetchData,
@@ -18,16 +21,41 @@ function UpdateInterview({
     interviewerName: _interviewerName,
   },
 }) {
+  function timeConversion(timeStart,f)
+{
+  if(f==1)
+ { let t;
+  let t2;
+  t=(parseInt(parseInt(timeStart) / 60));
+  if(t<10) 
+  {t2= "0"+t;} 
+  else 
+  t2=t;
+  return t2;
+ }
+ else
+ {
+  let t;
+  let t2;
+  t=(parseInt(parseInt(timeStart) % 60));
+  if(t<10) 
+  {t2= "0"+t;} 
+  else 
+  t2=t;
+  return t2;
+ }
+
+}
   const [date, setDate] = useState(_date);
-  const [startTime, setStartTime] = useState(timeStart);
-  const [endTime, setEndTime] = useState(timeEnd);
-  const [interviewer, setInterviewer] = useState(_interviewer?.split(',')[0]);
+  const [startTime, setStartTime] = useState(timeConversion(timeStart,1)+":"+timeConversion(timeStart,0));//(parseInt(parseInt(timeStart)/60))+":"+(parseInt(parseInt(timeStart)%60)));
+  const [endTime, setEndTime] = useState(timeConversion(timeEnd,1)+":"+timeConversion(timeEnd,0));//useState(timeEnd);
+  const [interviewer, setInterviewer] = useState(_interviewer[0]);
   const [candidate, setCandidate] = useState(_candidate);
   const [interviewer1, setInterviewer1] = useState(
-    _interviewer?.split(',')[1] || ''
+    _interviewer[1] || ''
   );
   const [interviewer2, setInterviewer2] = useState(
-    _interviewer?.split(',')[2] || ''
+    _interviewer[2] || ''
   );
   const [isError, setError] = useState(false);
   const [errorDialog, setErrorDialog] = useState('');
@@ -38,6 +66,7 @@ function UpdateInterview({
 
   const handleSubmit = async () => {
     try {
+     // errorDialog="OKERROR";
       let formData = new FormData();
       //time conversion
       const timeS = startTime.split(':');
@@ -153,13 +182,13 @@ function UpdateInterview({
       if (_err) {
         console.log('Exiting');
       } else {
+        
         formData.append('timeStart', timeSValue);
         formData.append('timeEnd', timeEValue);
         formData.append('date', date);
-        formData.append(
-          'interviewer',
-          interviewer + `,${interviewer1},${interviewer2}`
-        );
+        formData.append('interviewer',interviewer); 
+        formData.append('interviewer',interviewer1);
+        formData.append('interviewer',interviewer2);
         formData.append('candidate', candidate);
         formData.append('interviewerName', interviewerName);
         formData.append('candidateName', candidateName);
@@ -254,14 +283,17 @@ function UpdateInterview({
           <div className='form-group'>
             <label>Date: </label>
             <input
+            defaultValue={date}
               className='form-control'
               onChange={(e) => setDate(e.target.value)}
               type='date'
             />
           </div>
           <div className='form-group'>
-            <label>Start Time: </label>
+            <label>Start Time:</label>
             <input
+            defaultValue={startTime}
+              
               className='form-control'
               onChange={(e) => setStartTime(e.target.value)}
               type='time'
@@ -270,6 +302,7 @@ function UpdateInterview({
           <div className='form-group'>
             <label>End Time: </label>
             <input
+            defaultValue={endTime}
               className='form-control'
               onChange={(e) => setEndTime(e.target.value)}
               type='time'
